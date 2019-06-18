@@ -7,6 +7,10 @@
 
 **Detect if picture has a face**
 
+Install
+
+    pip install -r requirements.txt
+
 Usage:
 
     python detect.py path_to_image/picture.jpeg
