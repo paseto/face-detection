@@ -7,6 +7,10 @@
 
 **Detect if picture has a face**
 
+Requirements
+
+    sudo apt-get install -y cmake libsm6 libxext6 libxrender-dev
+
 Install
 
     pip install -r requirements.txt
