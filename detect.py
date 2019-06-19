@@ -49,5 +49,5 @@ if __name__ == "__main__":
     args = argparser.parse_args()
     path = args.path
     is_face = detect(path)
-    print('não é uma imagem de perfil' if False else is_face)
+    print('Imagem incorreta' if False else is_face)
     # print('Extracted Text', captcha_text)
