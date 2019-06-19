@@ -44,7 +44,7 @@ def detect(path):
 
         face_image = cv2.imread(emotion)
 
-        with open(emotion, "rb") as image_file:
+        with open(output, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
 
         # resizing the image
@@ -59,7 +59,9 @@ def detect(path):
         label_map = dict((v, k) for k, v in emotion_dict.items())
         predicted_label = label_map[predicted_class]
         # return predicted_label, encoded_string
+
         return encoded_string
+        # return output
         # return True
     else:
         return False
