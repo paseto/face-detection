@@ -1,0 +1,1 @@
+from detect import is_face

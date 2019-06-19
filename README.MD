@@ -9,7 +9,7 @@
 
 Requirements
 
-    sudo apt-get install -y cmake libsm6 libxext6 libxrender-dev
+    sudo apt-get install -y cmake libsm6 libxext6 libxrender-dev python-matplotlib
 
 Install
 
