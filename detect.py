@@ -7,12 +7,14 @@ import keras
 from keras.models import load_model
 import argparse
 import cv2
+import base64
 
 dirpath = os.getcwd()
 scriptpath = os.path.realpath(__file__)
 base_dir = os.path.dirname(scriptpath)
 
 output = base_dir + "/output.jpg"
+emotion = base_dir + "/emotion.jpg"
 
 
 def detect(path):
@@ -24,14 +26,26 @@ def detect(path):
     # If none result is not a face image
     if len(face_locations) == 1:
         top, right, bottom, left = face_locations[0]
-        face_image1 = image[top:bottom, left:right]
+        sample_top = int(top - top * 0.45)
+        sample_bottom = int((bottom * 0.15) + bottom)
+        sample_left = int(left - left * 0.35)
+        sample_right = int((right * 0.15) + right)
+
+        face_image1 = image[sample_top:sample_bottom, sample_left:sample_right]
         image_save = Image.fromarray(face_image1)
         image_save.save(output)
 
         # Emotion
+        emotion_image = image[top:bottom, left:right]
+        emotion_image_save = Image.fromarray(emotion_image)
+        emotion_image_save.save(emotion)
+
         emotion_dict = {'Angry': 0, 'Sad': 5, 'Neutral': 4, 'Disgust': 1, 'Surprise': 6, 'Fear': 2, 'Happy': 3}
 
-        face_image = cv2.imread(output)
+        face_image = cv2.imread(emotion)
+
+        with open(emotion, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
 
         # resizing the image
         face_image = cv2.resize(face_image, (48, 48))
@@ -40,11 +54,12 @@ def detect(path):
 
         # Train model
         # https://github.com/priya-dwivedi/face_and_emotion_detection/blob/master/src/EmotionDetector_v2.ipynb
-        model = load_model(base_dir+"/model_v6_23.hdf5")
+        model = load_model(base_dir + "/model_v6_23.hdf5")
         predicted_class = np.argmax(model.predict(face_image))
         label_map = dict((v, k) for k, v in emotion_dict.items())
         predicted_label = label_map[predicted_class]
-        return predicted_label
+        # return predicted_label, encoded_string
+        return encoded_string
         # return True
     else:
         return False
@@ -53,8 +68,10 @@ def detect(path):
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
     argparser.add_argument('path', help='Picture file path')
+    # todo argument parser predict emotion
+    argparser.add_argument('--e', metavar='emotion', required=False, help='emotion')
     args = argparser.parse_args()
     path = args.path
     is_face = detect(path)
-    print('Imagem incorreta' if False else is_face)
+    print(False if False else is_face)
     # print('Extracted Text', captcha_text)
