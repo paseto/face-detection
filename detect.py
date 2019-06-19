@@ -1,3 +1,4 @@
+import os
 from PIL import Image
 from matplotlib import pyplot as plt
 import numpy as np
@@ -6,6 +7,12 @@ import keras
 from keras.models import load_model
 import argparse
 import cv2
+
+dirpath = os.getcwd()
+scriptpath = os.path.realpath(__file__)
+base_dir = os.path.dirname(scriptpath)
+
+output = base_dir + "/output.jpg"
 
 
 def detect(path):
@@ -19,12 +26,12 @@ def detect(path):
         top, right, bottom, left = face_locations[0]
         face_image1 = image[top:bottom, left:right]
         image_save = Image.fromarray(face_image1)
-        image_save.save("./output.jpg")
+        image_save.save(output)
 
         # Emotion
         emotion_dict = {'Angry': 0, 'Sad': 5, 'Neutral': 4, 'Disgust': 1, 'Surprise': 6, 'Fear': 2, 'Happy': 3}
 
-        face_image = cv2.imread("output.jpg")
+        face_image = cv2.imread(output)
 
         # resizing the image
         face_image = cv2.resize(face_image, (48, 48))
@@ -33,7 +40,7 @@ def detect(path):
 
         # Train model
         # https://github.com/priya-dwivedi/face_and_emotion_detection/blob/master/src/EmotionDetector_v2.ipynb
-        model = load_model("model_v6_23.hdf5")
+        model = load_model(base_dir+"/model_v6_23.hdf5")
         predicted_class = np.argmax(model.predict(face_image))
         label_map = dict((v, k) for k, v in emotion_dict.items())
         predicted_label = label_map[predicted_class]

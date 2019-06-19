@@ -9,11 +9,15 @@
 
 Requirements
 
-    sudo apt-get install -y cmake libsm6 libxext6 libxrender-dev python-matplotlib
+    sudo apt-get install -y cmake libsm6 libxext6 libxrender-dev python-matplotlib python-tk
 
 Install
 
     pip install -r requirements.txt
+    
+    or
+    
+    pip install Pillow matplotlib face_recognition keras tensorflow opencv-python
 
 Usage:
 
