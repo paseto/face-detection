@@ -1,5 +1,5 @@
-import os
 from PIL import Image
+import os
 from matplotlib import pyplot as plt
 import numpy as np
 import face_recognition
@@ -29,7 +29,7 @@ def detect(path):
         try:
             os.mkdir(app_dir)
         except OSError:
-            print('')
+            None
 
         output = app_dir + "/output" + extension
         emotion = app_dir + "/emotion" + extension
@@ -69,8 +69,8 @@ def detect(path):
         predicted_label = label_map[predicted_class]
         # return predicted_label, encoded_string
 
-        os.remove(output)
-        os.remove(emotion)
+        # os.remove(output)
+        # os.remove(emotion)
 
         return encoded_string
         # return output
