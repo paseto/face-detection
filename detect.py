@@ -24,8 +24,8 @@ def detect(path):
     if len(face_locations) == 1:
         # print(os.path.splitext(path))
         # imgname = os.path.splitext(path)[0]
-        # extension = os.path.splitext(path)[1]
-        extension = ".jpg"
+        extension = os.path.splitext(path)[1]
+        # extension = ".jpg"
 
         app_dir = base_dir + "/outs"
         try:
