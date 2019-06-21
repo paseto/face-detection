@@ -79,7 +79,7 @@ def detect(path):
         # return output
         # return True
     else:
-        return False
+        return 0
 
 
 if __name__ == "__main__":
