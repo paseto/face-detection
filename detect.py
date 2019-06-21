@@ -13,9 +13,6 @@ dirpath = os.getcwd()
 scriptpath = os.path.realpath(__file__)
 base_dir = os.path.dirname(scriptpath)
 
-output = base_dir + "/output.jpg"
-emotion = base_dir + "/emotion.jpg"
-
 
 def detect(path):
     """Detect if picture has a face, returns false or emotion detection prediction (happy, sad, angry, etc)"""
@@ -25,6 +22,18 @@ def detect(path):
     # If more than one result are a lot of faces
     # If none result is not a face image
     if len(face_locations) == 1:
+        # imgname = os.path.splitext(path)[0]
+        extension = os.path.splitext(path)[1]
+
+        app_dir = base_dir + "/outs"
+        try:
+            os.mkdir(app_dir)
+        except OSError:
+            print('')
+
+        output = app_dir + "/output" + extension
+        emotion = app_dir + "/emotion" + extension
+
         top, right, bottom, left = face_locations[0]
         sample_top = int(top - top * 0.45)
         sample_bottom = int((bottom * 0.15) + bottom)
@@ -60,7 +69,10 @@ def detect(path):
         predicted_label = label_map[predicted_class]
         # return predicted_label, encoded_string
 
-        return encoded_string
+        os.remove(output)
+        os.remove(emotion)
+
+        # return encoded_string
         # return output
         # return True
     else:
@@ -75,5 +87,5 @@ if __name__ == "__main__":
     args = argparser.parse_args()
     path = args.path
     is_face = detect(path)
-    print("False" if False else is_face)
+    print(False if False else is_face)
     # print('Extracted Text', captcha_text)
