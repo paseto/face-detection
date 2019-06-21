@@ -75,5 +75,5 @@ if __name__ == "__main__":
     args = argparser.parse_args()
     path = args.path
     is_face = detect(path)
-    print(False if False else is_face)
+    print("False" if False else is_face)
     # print('Extracted Text', captcha_text)
