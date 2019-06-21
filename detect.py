@@ -24,7 +24,8 @@ def detect(path):
     if len(face_locations) == 1:
         # print(os.path.splitext(path))
         # imgname = os.path.splitext(path)[0]
-        extension = os.path.splitext(path)[1]
+        # extension = os.path.splitext(path)[1]
+        extension = ".jpg"
 
         app_dir = base_dir + "/outs"
         try:
@@ -43,7 +44,6 @@ def detect(path):
 
         face_image1 = image[sample_top:sample_bottom, sample_left:sample_right]
         image_save = Image.fromarray(face_image1)
-        print(output)
         image_save.save(output)
 
         # Emotion
@@ -71,8 +71,8 @@ def detect(path):
         predicted_label = label_map[predicted_class]
         # return predicted_label, encoded_string
 
-        # os.remove(output)
-        # os.remove(emotion)
+        os.remove(output)
+        os.remove(emotion)
 
         return encoded_string
         # return output
