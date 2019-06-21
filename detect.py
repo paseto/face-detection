@@ -22,6 +22,7 @@ def detect(path):
     # If more than one result are a lot of faces
     # If none result is not a face image
     if len(face_locations) == 1:
+        print(os.path.splitext(path))
         # imgname = os.path.splitext(path)[0]
         extension = os.path.splitext(path)[1]
 
