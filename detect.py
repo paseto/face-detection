@@ -37,10 +37,10 @@ def detect(path):
         emotion = app_dir + "/emotion" + extension
 
         top, right, bottom, left = face_locations[0]
-        sample_top = int(top - top * 0.45)
-        sample_bottom = int((bottom * 0.15) + bottom)
-        sample_left = int(left - left * 0.35)
-        sample_right = int((right * 0.15) + right)
+        sample_top = int(top - top * 0.55)
+        sample_bottom = int((bottom * 0.25) + bottom)
+        sample_left = int(left - left * 0.45)
+        sample_right = int((right * 0.25) + right)
 
         face_image1 = image[sample_top:sample_bottom, sample_left:sample_right]
         image_save = Image.fromarray(face_image1)
