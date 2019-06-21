@@ -56,7 +56,7 @@ def detect(path):
         face_image = cv2.imread(emotion)
 
         with open(output, "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
+            encoded_string = "data:image/jpeg;base64," + base64.b64encode(image_file.read())
 
         # resizing the image
         face_image = cv2.resize(face_image, (48, 48))
