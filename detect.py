@@ -72,7 +72,7 @@ def detect(path):
         os.remove(output)
         os.remove(emotion)
 
-        # return encoded_string
+        return encoded_string
         # return output
         # return True
     else:
