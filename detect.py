@@ -94,6 +94,9 @@ def detect(path):
         return "data:image/jpeg;base64," + encoded_string
         # return output
         # return True
+    elif len(face_locations) > 1:
+        return 2
+
     else:
         return 0
 
