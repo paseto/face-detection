@@ -14,7 +14,7 @@ import cv2
 import base64
 
 # suppress warnings because mobile wont work
-# keras.logging.set_verbosity(tf.logging.ERROR)
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 #
 # def fxn():
