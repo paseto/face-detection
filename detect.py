@@ -1,6 +1,9 @@
-import warnings
-from PIL import Image
 import os
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow as tf
+from PIL import Image
+import warnings
 from matplotlib import pyplot as plt
 import numpy as np
 import face_recognition
@@ -11,16 +14,16 @@ import cv2
 import base64
 
 # suppress warnings because mobile wont work
-import warnings
+# keras.logging.set_verbosity(tf.logging.ERROR)
 
-
-def fxn():
-    warnings.warn("deprecated", DeprecationWarning)
-
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    fxn()
+#
+# def fxn():
+#     warnings.warn("deprecated", DeprecationWarning)
+#
+#
+# with warnings.catch_warnings():
+#     warnings.simplefilter("ignore")
+#     fxn()
 
 dirpath = os.getcwd()
 scriptpath = os.path.realpath(__file__)
