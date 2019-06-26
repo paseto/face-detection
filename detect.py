@@ -57,29 +57,30 @@ def fix_orientation(img, save_over=False):
         raise ValueError("You can't use `save_over` when passing an Image instance.  Use a file path instead.")
     try:
         orientation = img._getexif()[EXIF_ORIENTATION_TAG]
+        if orientation in [3, 6, 8]:
+            degrees = ORIENTATIONS[orientation][1]
+            img = img.rotate(degrees)
+            if save_over and path is not None:
+                try:
+                    img.save(path, quality=95, optimize=1)
+                except IOError:
+                    # Try again, without optimization (PIL can't optimize an image
+                    # larger than ImageFile.MAXBLOCK, which is 64k by default).
+                    # Setting ImageFile.MAXBLOCK should fix this....but who knows.
+                    img.save(path, quality=95)
+            return (img, degrees)
+        else:
+            return (img, 0)
     except (TypeError, AttributeError, KeyError):
-        raise ValueError("Image file has no EXIF data.")
-    if orientation in [3, 6, 8]:
-        degrees = ORIENTATIONS[orientation][1]
-        img = img.rotate(degrees)
-        if save_over and path is not None:
-            try:
-                img.save(path, quality=95, optimize=1)
-            except IOError:
-                # Try again, without optimization (PIL can't optimize an image
-                # larger than ImageFile.MAXBLOCK, which is 64k by default).
-                # Setting ImageFile.MAXBLOCK should fix this....but who knows.
-                img.save(path, quality=95)
-        return (img, degrees)
-    else:
-        return (img, 0)
+        None
+        # raise ValueError("Image file has no EXIF data.")
 
 
 def detect(path):
     """Detect if picture has a face, returns false or emotion detection prediction (happy, sad, angry, etc)"""
 
     # Rotate image
-    fix_orientation(path, path)
+    fix_orientation(path)
 
     image = face_recognition.load_image_file(path)
     face_locations = face_recognition.face_locations(image)
