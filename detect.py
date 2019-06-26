@@ -12,18 +12,10 @@ from keras.models import load_model
 import argparse
 import cv2
 import base64
+import img_rotate
 
 # suppress warnings because mobile wont work
 tf.logging.set_verbosity(tf.logging.ERROR)
-
-#
-# def fxn():
-#     warnings.warn("deprecated", DeprecationWarning)
-#
-#
-# with warnings.catch_warnings():
-#     warnings.simplefilter("ignore")
-#     fxn()
 
 dirpath = os.getcwd()
 scriptpath = os.path.realpath(__file__)
@@ -32,7 +24,10 @@ base_dir = os.path.dirname(scriptpath)
 
 def detect(path):
     """Detect if picture has a face, returns false or emotion detection prediction (happy, sad, angry, etc)"""
-    # img = Image.open(path)
+
+    # Rotate image
+    img_rotate.fix_orientation(path, './outs/fixed.jpg')
+
     image = face_recognition.load_image_file(path)
     face_locations = face_recognition.face_locations(image)
     # If more than one result are a lot of faces
