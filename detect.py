@@ -86,6 +86,8 @@ def detect(path):
     pathimage.save(messed)
     fix_orientation(messed)
 
+    path = messed
+
     image = face_recognition.load_image_file(path)
     face_locations = face_recognition.face_locations(image)
     # If more than one result are a lot of faces
