@@ -1,7 +1,8 @@
-import os
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
+import argparse
+import cv2
+import base64
+import os
 from PIL import Image, ImageFile
 import warnings
 from matplotlib import pyplot as plt
@@ -9,12 +10,11 @@ import numpy as np
 import face_recognition
 import keras
 from keras.models import load_model
-import argparse
-import cv2
-import base64
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 # suppress warnings because mobile wont work
-tf.logging.set_verbosity(tf.logging.ERROR)
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 dirpath = os.getcwd()
 scriptpath = os.path.realpath(__file__)
