@@ -79,14 +79,8 @@ def fix_orientation(img, save_over=False):
 def detect(path):
     """Detect if picture has a face, returns false or emotion detection prediction (happy, sad, angry, etc)"""
 
-    pathimage = Image.open(path)
-
     # Rotate image
-    messed = base_dir + "/outs/rotate.jpeg"
-    pathimage.save(messed)
-    fix_orientation(messed)
-
-    path = messed
+    fix_orientation(path, True)
 
     image = face_recognition.load_image_file(path)
     face_locations = face_recognition.face_locations(image)
