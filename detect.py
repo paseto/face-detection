@@ -26,7 +26,7 @@ def detect(path):
     """Detect if picture has a face, returns false or emotion detection prediction (happy, sad, angry, etc)"""
 
     # Rotate image
-    img_rotate.fix_orientation(path, './outs/fixed.jpg')
+    img_rotate.fix_orientation(path, path)
 
     image = face_recognition.load_image_file(path)
     face_locations = face_recognition.face_locations(image)
