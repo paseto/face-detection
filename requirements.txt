@@ -2,7 +2,7 @@ absl-py==0.7.1
 astor==0.8.0
 Click==7.0
 cycler==0.10.0
-Django==2.2.2
+Django==2.2.24
 dlib==19.17.0
 face-recognition==1.2.3
 face-recognition-models==0.3.0
